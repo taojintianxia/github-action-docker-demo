@@ -25,7 +25,11 @@ jobs:
           mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
         
       - name: Start MySQL
-        run: sudo systemctl restart mysql.service
+        run: |
+          sudo /lib/systemd/systemd-sysv-install enable mysql
+          sudo systemctl enable mysql.service
+          sudo systemctl start mysql.service
+          sudo systemctl status mysql.service
 
       - name: Get The MySQL Result
         run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
