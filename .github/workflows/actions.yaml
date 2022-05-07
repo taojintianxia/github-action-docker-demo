@@ -25,6 +25,6 @@ jobs:
           mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
 
       - name: install-mysql-client
-	run: sudo service mysql start
-      - name: test-mysql-instance
-	run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+	    run: "sudo service mysql start"
+      - name: install-mysql-client
+	    run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
