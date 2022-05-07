@@ -14,9 +14,7 @@ jobs:
       - name: show path
         run: |
           pwd
-          sudo ls
-          cd .github/workflow/config/
-          sudo ls
+          sudo ll -a
 #      - name: Setup Zookeeper
 #        run: |
 #          sudo docker run -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
