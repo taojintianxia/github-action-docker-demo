@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: Setup Zookeeper
         run: |
-          sudo docker run --name mysql8 -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
-          sudo docker run --name zookeeper -itd -p 2181:2181 zookeeper:3.7.0
+          sudo docker run --net=host --name mysql -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
+          sudo docker run --net=host --name zookeeper -itd -p 2181:2181 zookeeper:3.7.0
       - name: Setup Zookeeper
         run: sudo docker ps
         
@@ -31,7 +31,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: Setup Proxy
-        run: sudo docker run --name shardingsphere-proxy -d -v ${GITHUB_WORKSPACE}/.github/conf:/opt/shardingsphere-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
+        run: sudo docker run --net=host --name shardingsphere-proxy -d -v ${GITHUB_WORKSPACE}/.github/conf:/opt/shardingsphere-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
 
       - name: Waiting for Container
         run: sleep 15
