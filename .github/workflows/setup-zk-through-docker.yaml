@@ -15,4 +15,4 @@ jobs:
         run: sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
 
       - name: Check Docker Status
-        run: lsof -i:2181
+        run: sudo lsof -i:2181
