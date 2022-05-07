@@ -28,3 +28,4 @@ jobs:
         run: sudo service mysql start
       - name: Get The MySQL Result
         run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+
