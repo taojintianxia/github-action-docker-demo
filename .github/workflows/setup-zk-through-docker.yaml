@@ -1,24 +1,24 @@
-#name: setup-zookeeper-docker
-#
-#on:
-#  push:
-#    branches:
-#      - main
-#
-#jobs:
-#  setup-mysql-environment:
-#    name: setup-zookeeper-environment
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 20
-#    steps:
-#      - name: Setup Zookeeper
-#        run: sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
-#
-#      - name: Wait Docker Container
-#        run: sleep 15
-#
-#      - name: Check Docker Status
-#        run: sudo docker ps
-#
-#      - name: Check Service Status
-#        run: sudo lsof -i:2181
+name: setup-zookeeper-docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-mysql-environment:
+    name: setup-zookeeper-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Setup Zookeeper
+        run: sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
+
+      - name: Wait Docker Container
+        run: sleep 15
+
+      - name: Check Docker Status
+        run: sudo docker ps
+
+      - name: Check Service Status
+        run: sudo lsof -i:2181
