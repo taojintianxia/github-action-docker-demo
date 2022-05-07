@@ -26,6 +26,10 @@ jobs:
           
       - name: Install MySQL
         run: sudo service mysql start
+        
+      - name: Show MySQL Status
+        run: systemctl status mysql.service
+        
       - name: Get The MySQL Result
         run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
 
