@@ -40,4 +40,4 @@ jobs:
         run: |
           sudo docker logs zookeeper
           sudo docker logs shardingsphere-proxy
-#          mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
+          mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
