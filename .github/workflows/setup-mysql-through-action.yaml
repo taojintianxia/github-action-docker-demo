@@ -1,4 +1,4 @@
-name: docker-test
+name: setup-mysql-action
 
 on:
   push:
