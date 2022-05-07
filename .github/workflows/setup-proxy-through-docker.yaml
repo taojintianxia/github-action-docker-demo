@@ -29,10 +29,10 @@ jobs:
           sudo systemctl status mysql.service
 
       - name: Setup Proxy
-        run: docker run -d -v ${GITHUB_WORKSPACE}/.git/config:/opt/sharding-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
+        run: docker run -d -v ${GITHUB_WORKSPACE}/.git/conf:/opt/sharding-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
 
       - name: Waiting for Container
-        run: sleep 15
+        run: sleep 30
 
       - name: MySQL Show Proxy
         run: mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
