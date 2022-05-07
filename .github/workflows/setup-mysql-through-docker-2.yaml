@@ -1,38 +1,58 @@
-name: setup-mysql-docker
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  setup-mysql-environment:
-    name: setup-mysql-environment
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - name: Setup Zookeeper
-        run: docker run -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
-
-      - name: Wait Docker Container
-        run: sleep 15
-        
-      - name: Check Docker Status
-        run: sudo docker ps
-        
-      - name: Check Service Status
-        run: sudo lsof -i:13306
-
-      ## the following code is for checking the MySQL instance
-      - name: Create DB structure
-        run: |
-          sudo /lib/systemd/systemd-sysv-install enable mysql
-          sudo systemctl enable mysql.service
-          sudo systemctl start mysql.service
-          sudo systemctl status mysql.service
-
-      - name: Waiting MySQL
-        run: sleep 15
-
-      - name: Get The MySQL Result
-        run: mysql -h127.0.0.1 -P13306 -p${{ secrets.RootPassword }} -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+#name: setup-mysql-docker
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  setup-mysql-environment:
+#    name: setup-mysql-environment
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 20
+#    steps:
+#      - name: Setup Zookeeper
+#        run: docker run -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
+#
+#      - name: Wait Docker Container
+#        run: sleep 15
+#        
+#      - name: Check Docker Status
+#        run: sudo docker ps
+#        
+#      - name: Check Service Status
+#        run: sudo lsof -i:13306
+#
+#      ## the following code is for checking the MySQL instance
+#      - name: Create DB structure
+#        run: |
+#          sudo /lib/systemd/systemd-sysv-install enable mysql
+#          sudo systemctl enable mysql.service
+#          sudo systemctl start mysql.service
+#          sudo systemctl status mysql.service
+#
+#      - name: Waiting MySQL
+#        run: sleep 15
+#
+#      - name: Get The MySQL Result
+#        run: mysql -h127.0.0.1 -P13306 -p${{ secrets.RootPassword }} -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+#
+#      - name: Execute test case
+#        run: |
+#          mvn package
+#          // unpack package built by source code(auto-test-1.0-SNAPSHOT-full.zip)
+#          unzip unzip auto-test-1.0-SNAPSHOT-full.zip
+#
+#          cd auto-test-1.0-SNAPSHOT
+#
+#          ./bin/auto-test.sh -h 127.0.0.1 -P 3309 -d sharding_db -u root -p root
+#
+#          //Help
+#
+#          ./bin/auto-test.sh
+#          
+#      - uses: actions/checkout@v2
+#      - name: Maven resolve ranges
+#        run: |
+#          ./mvnw package
+#          ./bin/auto
