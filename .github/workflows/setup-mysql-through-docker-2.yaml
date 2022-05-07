@@ -1,4 +1,4 @@
-name: setup-zookeeper-docker
+name: setup-mysql-docker
 
 on:
   push:
@@ -7,12 +7,12 @@ on:
 
 jobs:
   setup-mysql-environment:
-    name: setup-zookeeper-environment
+    name: setup-mysql-environment
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Setup Zookeeper
-        run: sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
+        run: docker run -itd -e MYSQL_ROOT_PASSWORD=root -p13306:3306 mysql:8.0.28
 
       - name: Wait Docker Container
         run: sleep 15
@@ -21,4 +21,4 @@ jobs:
         run: sudo docker ps
         
       - name: Check Service Status
-        run: sudo lsof -i:2181
+        run: sudo lsof -i:13306
