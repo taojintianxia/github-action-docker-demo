@@ -1,0 +1,25 @@
+name: docker-test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-mysql-environment:
+    name: setup-mysql-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v3
+      - uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: '5.7'
+          my-cnf: |
+            innodb_log_file_size=256MB
+            innodb_buffer_pool_size=512MB
+            max_allowed_packet=16MB
+            max_connections=50
+            local_infile=1
+          root-password: root
+      - run: mysql -uroot -proot -h127.0.0.1 -e 'SELECT version()'
