@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - uses: actions/checkout@v2
       - name: show path
         run: cat .github/config/server.yaml
 #      - name: Setup Zookeeper
