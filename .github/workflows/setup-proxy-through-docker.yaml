@@ -13,9 +13,11 @@ jobs:
     steps:
       - name: Setup Zookeeper
         run: |
-          sudo docker run -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
-          sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
-
+          sudo docker run --name mysql8 -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
+          sudo docker run --name zookeeper -itd -p 2181:2181 zookeeper:3.7.0
+      - name: Setup Zookeeper
+        run: sudo docker ps
+        
       - name: Waiting for Container
         run: sleep 15
 
@@ -36,5 +38,6 @@ jobs:
 
       - name: MySQL Show Proxy
         run: |
+          sudo docker logs zookeeper
           sudo docker logs shardingsphere-proxy
-          mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
+#          mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
