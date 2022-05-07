@@ -41,4 +41,4 @@ jobs:
         run: sleep 30
       
       - name: Get The MySQL Result
-        run: mysql -h127.0.0.1 -P13308 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+        run: mysql -h127.0.0.1 -P13308 -p${{ secrets.RootPassword }} -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
