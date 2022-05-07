@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: show path
-        run: cat ${GITHUB_WORKSPACE}/.git/conf/server.yaml
+        run: cat .git/conf/server.yaml
 #      - name: Setup Zookeeper
 #        run: |
 #          sudo docker run -itd -e MYSQL_ROOT_PASSWORD=${{ secrets.RootPassword }} -p13306:3306 mysql:8.0.28
