@@ -23,8 +23,8 @@ jobs:
           mysql root password: ${{ secrets.RootPassword }} # Required if "mysql user" is empty, default is empty. The root superuser password
           mysql user: 'developer' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: ${{ secrets.DatabasePassword }} # Required if "mysql user" exists. The password for the "mysql user"
-
-      - name: install-mysql-client
-	    run: "sudo service mysql start"
-      - name: install-mysql-client
-	    run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
+          
+      - name: Install MySQL
+        run: sudo service mysql start
+      - name: Get The MySQL Result
+        run: mysql -h127.0.0.1 -uroot -e "SELECT t.* FROM information_schema.USER_PRIVILEGES t limit 10"
