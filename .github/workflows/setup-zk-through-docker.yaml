@@ -5,14 +5,13 @@ on:
     branches:
       - main
 
-
 jobs:
   setup-mysql-environment:
     name: setup-mysql-environment
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: Setup Zookeeper
+      - name: Setup Zookeeper
         run: sudo docker run -itd -p 2181:2181 zookeeper:3.7.0
 
       - name: Check Docker Status
