@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - uses: actions/checkout@v2
       - name: show path
         run: cat ${GITHUB_WORKSPACE}/.git/conf:/opt/shardingsphere-proxy/conf/server.yaml
 #      - uses: actions/checkout@v2
@@ -31,10 +32,12 @@ jobs:
 #          sudo systemctl status mysql.service
 #
 #      - name: Setup Proxy
-#        run: docker run -d -v ${GITHUB_WORKSPACE}/.git/conf:/opt/shardingsphere-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
+#        run: sudo docker run --name shardingsphere-proxy -d -v ${GITHUB_WORKSPACE}/.git/conf:/opt/shardingsphere-proxy/conf -e PORT=3307 -p3307:3307 ghcr.io/apache/shardingsphere-proxy:latest 
 #
 #      - name: Waiting for Container
 #        run: sleep 30
 #
 #      - name: MySQL Show Proxy
-#        run: mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
+#        run: |
+#          sudo docker logs shardingsphere-proxy
+#          mysql -h127.0.0.1 -P3307 -p${{ secrets.RootPassword }} -uroot -e "SELECT version()"
