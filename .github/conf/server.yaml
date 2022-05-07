@@ -27,7 +27,7 @@ mode:
     type: ZooKeeper
     props:
       namespace: governance_ds
-      server-lists: mysql8:2181
+      server-lists: zookeeper:2181
       retryIntervalMilliseconds: 500
       timeToLiveSeconds: 60
       maxRetries: 3
