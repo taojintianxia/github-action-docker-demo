@@ -23,6 +23,7 @@ jobs:
       - name: Check Service Status
         run: sudo lsof -i:13306
 
+      ## the following code is for checking the MySQL instance
       - name: Create DB structure
         run: |
           sudo /lib/systemd/systemd-sysv-install enable mysql
